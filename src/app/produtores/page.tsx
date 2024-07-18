@@ -5,7 +5,6 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -17,7 +16,7 @@ export default function Producers() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>Produtores</h1>
 
-      <Drawer>
+      <Drawer open>
         <DrawerTrigger asChild>
           <Button className="space-x-2">
             <Plus /> <span>Novo Produtor</span>
@@ -40,10 +39,6 @@ export default function Producers() {
             <div>
               <FormCreateProducer />
             </div>
-
-            <DrawerFooter>
-              <Button>Submit</Button>
-            </DrawerFooter>
           </div>
         </DrawerContent>
       </Drawer>

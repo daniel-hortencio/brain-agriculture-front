@@ -7,8 +7,8 @@ type Props = {
 
 export const Layout = ({ children }: Props) => {
   return (
-    <div className="bg-yellow-100">
-      <nav>
+    <div className="w-screen">
+      <nav className="bg-red-500">
         <Link href="/">Início</Link>
         <Link href="/produtores">Produtores</Link>
       </nav>

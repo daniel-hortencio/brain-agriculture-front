@@ -95,7 +95,7 @@ type Props = {
 
 export const Chart = ({ data }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const onPieEnter = (_, index: number) => {
+  const onPieEnter = (_: any, index: number) => {
     setActiveIndex(index);
   };
 

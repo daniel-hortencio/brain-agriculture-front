@@ -98,8 +98,11 @@ export const Dashboard = () => {
 
     return [
       {
-        name: "Total",
-        value: ground_usage.total,
+        name: "Não utilizado",
+        value:
+          ground_usage.total -
+          ground_usage.arable_area -
+          ground_usage.vegetation_area,
         fill: "#DCDCF8",
         label: "",
       },
@@ -123,28 +126,30 @@ export const Dashboard = () => {
       <div className="flex">
         <h1 className="text-2xl font-semibold">Produtores</h1>
       </div>
-      <div className="flex gap-5">
-        <Card className="w-full max-w-80">
+      <div className="flex flex-col md:flex-row gap-5">
+        <Card className="w-full md:max-w-80">
           <CardContent className="space-y-2">
             <CardTitle className="text-lg">Total de fazendas</CardTitle>
-            <CardDescription className="text-6xl font-semibold text-neutral-400">
+            <CardDescription className="text-4xl lg:text-6xl font-semibold text-neutral-400">
               {total_farms}
             </CardDescription>
           </CardContent>
         </Card>
-        <Card className="w-full max-w-80">
+        <Card className="w-full md:max-w-80">
           <CardContent className="space-y-2">
             <CardTitle className="text-lg">
               Total de fazendas em hectares
             </CardTitle>
-            <CardDescription className="text-6xl font-semibold text-neutral-400">
+            <CardDescription className="text-4xl lg:text-6xl font-semibold text-neutral-400">
               {total_farms_area}
-              <span className="font-medium text-4xl text-neutral-300">ha</span>
+              <span className="font-medium text-2xl lg:text-4xl text-neutral-400/70">
+                ha
+              </span>
             </CardDescription>
           </CardContent>
         </Card>
       </div>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid xl:grid-cols-3 gap-5">
         <Card>
           <CardContent>
             <CardTitle className="text-lg">Estados</CardTitle>

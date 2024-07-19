@@ -3,32 +3,40 @@
 import { Button } from "@/components/ui/button";
 import { AsyncSelect } from "@/components/ui/custom/AsyncSelect";
 import { InputGroup } from "@/components/ui/custom/InputGroup";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ibgeDataServices } from "@/services/ibgeDataServices";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   CreateProducerSchema,
   CreateProducerType,
   defaultValues,
 } from "./schema";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { maskCPF } from "@/utils/maskCPF";
 import { maskCNPJ } from "@/utils/maskCNPJ";
 import { InputError } from "@/components/ui/custom/InputError";
 import { removeNonDigits } from "@/utils/removeNonDigits";
 import { MultipleSelect } from "@/components/ui/custom/MultipleSelect";
+import { ProducerType } from "@/types";
+import { useDispatch } from "react-redux";
+import { createProducer } from "@/store/producers";
 
-export const FormCreateProducer = () => {
+type Props = {
+  onSuccess: () => void;
+};
+
+export const FormCreateProducer = ({ onSuccess }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
     setValue,
     setError,
     getValues,
-    control,
     formState: { errors },
   } = useForm<CreateProducerType>({
     resolver: zodResolver(CreateProducerSchema),
@@ -52,18 +60,32 @@ export const FormCreateProducer = () => {
     );
   }, [getValues("doc_type")]);
 
-  const onSubmit: SubmitHandler<CreateProducerType> = async (data) => {
-    console.log({ data });
-  };
+  const onSubmit: SubmitHandler<CreateProducerType> = async (dto) => {
+    setLoading(true);
 
-  console.log({ errors });
+    const formated_dto: Omit<ProducerType, "id"> = {
+      ...dto,
+      doc_type: dto.doc_type,
+      total_area: parseInt(removeNonDigits(dto.total_area) || "0"),
+      arable_area: parseInt(removeNonDigits(dto.arable_area) || "0"),
+      vegetation_area: parseInt(removeNonDigits(dto.vegetation_area) || "0"),
+    };
+
+    await new Promise((resolve) =>
+      setTimeout(() => resolve(dispatch(createProducer(formated_dto))), 1500)
+    );
+
+    onSuccess();
+
+    setLoading(false);
+  };
 
   return (
     <form className="px-4 space-y-5" onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-2">
         <div className="grid md:grid-cols-2 gap-2 md:gap-5">
           <div className="space-y-2">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 space-y-1">
               <Label required>Documento</Label>
               <RadioGroup
                 className="flex items-center gap-2"
@@ -82,7 +104,8 @@ export const FormCreateProducer = () => {
               </RadioGroup>
             </div>
             <div className="space-y-1">
-              <Input
+              <InputGroup
+                label=""
                 {...register("doc")}
                 type="tel"
                 placeholder={
@@ -98,18 +121,20 @@ export const FormCreateProducer = () => {
                       : maskCNPJ(e.target.value)
                   )
                 }
+                error={errors.doc?.message}
               />
-              <InputError message={errors.doc?.message} />
             </div>
           </div>
-          <InputGroup
-            {...register("producer_name")}
-            required
-            label="Nome do Produtor"
-            placeholder="Insira o nome da fazenda..."
-            onChange={(e) => handleChange("producer_name", e.target.value)}
-            error={errors.producer_name?.message}
-          />
+          <div>
+            <InputGroup
+              {...register("name")}
+              required
+              label="Nome do Produtor"
+              placeholder="Insira o nome da fazenda..."
+              onChange={(e) => handleChange("name", e.target.value)}
+              error={errors.name?.message}
+            />
+          </div>
         </div>
         <InputGroup
           {...register("farm_name")}
@@ -219,7 +244,9 @@ export const FormCreateProducer = () => {
           <InputError message={errors.planting_crops?.message} />
         </div>
       </div>
-      <Button className="w-full">Cadastrar</Button>
+      <Button className="w-full" type="submit" loading={loading}>
+        Cadastrar
+      </Button>
     </form>
   );
 };

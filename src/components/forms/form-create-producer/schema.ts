@@ -9,7 +9,7 @@ export const CreateProducerSchema = z
     doc: z.string({ message: "Obrigatório" }),
     doc_type: z.enum(["CPF", "CNPJ"]),
     farm_name: z.string().min(3, { message: "Pelo menos 3 caracteres" }),
-    producer_name: z.string().min(3, { message: "Pelo menos 3 caracteres" }),
+    name: z.string().min(3, { message: "Pelo menos 3 caracteres" }),
     uf: z.string().min(2, { message: "Obrigatório" }),
     city: z.string().min(1, { message: "Obrigatório" }),
     total_area: z.string().min(1, { message: "Pelo menos 1 hectare" }),
@@ -72,7 +72,7 @@ export type CreateProducerType = z.infer<typeof CreateProducerSchema>;
 export const defaultValues: CreateProducerType = {
   doc: "",
   doc_type: "CPF",
-  producer_name: "",
+  name: "",
   farm_name: "",
   city: "",
   uf: "",

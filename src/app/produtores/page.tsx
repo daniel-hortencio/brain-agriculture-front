@@ -26,7 +26,7 @@ export default function Producers() {
             <Plus /> <span>Novo Produtor</span>
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="w-4/5 max-w-lg">
+        <DrawerContent className="w-full max-w-2xl">
           <div className="space-y-2">
             <DrawerHeader className="flex items-center justify-between gap-5">
               <DrawerTitle>Adicionar Novo Produtor</DrawerTitle>

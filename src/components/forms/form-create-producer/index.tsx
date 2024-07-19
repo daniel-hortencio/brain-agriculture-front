@@ -19,6 +19,7 @@ import { maskCPF } from "@/utils/maskCPF";
 import { maskCNPJ } from "@/utils/maskCNPJ";
 import { InputError } from "@/components/ui/custom/InputError";
 import { removeNonDigits } from "@/utils/removeNonDigits";
+import { MultipleSelect } from "@/components/ui/custom/MultipleSelect";
 
 export const FormCreateProducer = () => {
   const {
@@ -34,7 +35,10 @@ export const FormCreateProducer = () => {
     defaultValues,
   });
 
-  function handleChange(field: keyof CreateProducerType, value: string) {
+  function handleChange(
+    field: keyof CreateProducerType,
+    value: string | string[]
+  ) {
     setValue(field, value);
     setError(field, { message: "" });
   }
@@ -57,54 +61,56 @@ export const FormCreateProducer = () => {
   return (
     <form className="px-4 space-y-5" onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-2">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Label required>Documento</Label>
-            <RadioGroup
-              className="flex items-center gap-2"
-              name="doc_type"
-              defaultValue={getValues("doc_type")}
-              onChange={(e: any) => handleChange("doc_type", e.target.value)}
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="CPF" id="CPF" />
-                <Label htmlFor="CPF">CPF</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="CNPJ" id="CNPJ" />
-                <Label htmlFor="CNPJ">CNPJ</Label>
-              </div>
-            </RadioGroup>
-          </div>
-          <div className="space-y-1">
-            <Input
-              {...register("doc")}
-              type="tel"
-              placeholder={
-                getValues("doc_type") === "CPF"
-                  ? "XXX.XXX.XXX-XX"
-                  : "XX.XXX.XXX/XXXX-XX"
-              }
-              onChange={(e) =>
-                handleChange(
-                  "doc",
+        <div className="grid md:grid-cols-2 gap-2 md:gap-5">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Label required>Documento</Label>
+              <RadioGroup
+                className="flex items-center gap-2"
+                name="doc_type"
+                defaultValue={getValues("doc_type")}
+                onChange={(e: any) => handleChange("doc_type", e.target.value)}
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="CPF" id="CPF" />
+                  <Label htmlFor="CPF">CPF</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="CNPJ" id="CNPJ" />
+                  <Label htmlFor="CNPJ">CNPJ</Label>
+                </div>
+              </RadioGroup>
+            </div>
+            <div className="space-y-1">
+              <Input
+                {...register("doc")}
+                type="tel"
+                placeholder={
                   getValues("doc_type") === "CPF"
-                    ? maskCPF(e.target.value)
-                    : maskCNPJ(e.target.value)
-                )
-              }
-            />
-            <InputError message={errors.doc?.message} />
+                    ? "XXX.XXX.XXX-XX"
+                    : "XX.XXX.XXX/XXXX-XX"
+                }
+                onChange={(e) =>
+                  handleChange(
+                    "doc",
+                    getValues("doc_type") === "CPF"
+                      ? maskCPF(e.target.value)
+                      : maskCNPJ(e.target.value)
+                  )
+                }
+              />
+              <InputError message={errors.doc?.message} />
+            </div>
           </div>
+          <InputGroup
+            {...register("producer_name")}
+            required
+            label="Nome do Produtor"
+            placeholder="Insira o nome da fazenda..."
+            onChange={(e) => handleChange("producer_name", e.target.value)}
+            error={errors.producer_name?.message}
+          />
         </div>
-        <InputGroup
-          {...register("producer_name")}
-          required
-          label="Nome do Produtor"
-          placeholder="Insira o nome da fazenda..."
-          onChange={(e) => handleChange("producer_name", e.target.value)}
-          error={errors.producer_name?.message}
-        />
         <InputGroup
           {...register("farm_name")}
           required
@@ -114,91 +120,104 @@ export const FormCreateProducer = () => {
           placeholder="Insira o nome da fazenda..."
         />
 
-        <div>
-          <Label required>Estado</Label>
-          <AsyncSelect
-            id="uf"
-            value={getValues("uf")}
-            placeholder="Escolha um estado..."
-            onValueChange={(value) => {
-              handleChange("uf", value);
-              handleChange("city", "");
-            }}
-            service={() =>
-              ibgeDataServices.getUFs().then(({ isOk, data }) => {
-                return {
-                  isOk,
-                  data: isOk
-                    ? data.map((uf) => ({
-                        ...data,
-                        label: uf.nome,
-                        value: uf.sigla,
-                      }))
-                    : data,
-                };
-              })
-            }
-          />
-          <InputError message={errors.uf?.message} />
-        </div>
-
-        <div>
-          <Label required>Cidade</Label>
-          <AsyncSelect
-            id={`city_from_${getValues("uf")}`}
-            value={getValues("city")}
-            onValueChange={(value) => handleChange("city", value)}
-            placeholder="Escolha uma cidade..."
-            service={() =>
-              ibgeDataServices
-                .getCytiesByUF(getValues("uf"))
-                .then(({ isOk, data }) => {
+        <div className="grid md:grid-cols-2 gap-2 md:gap-5">
+          <div>
+            <Label required>Estado</Label>
+            <AsyncSelect
+              id="uf"
+              value={getValues("uf")}
+              placeholder="Escolha um estado..."
+              onValueChange={(value) => {
+                handleChange("uf", value);
+                handleChange("city", "");
+              }}
+              service={() =>
+                ibgeDataServices.getUFs().then(({ isOk, data }) => {
                   return {
                     isOk,
                     data: isOk
-                      ? data.map((city) => ({
+                      ? data.map((uf) => ({
                           ...data,
-                          label: city.nome,
-                          value: city.nome,
+                          label: uf.nome,
+                          value: uf.sigla,
                         }))
                       : data,
                   };
                 })
-            }
-          />
-          <InputError message={errors.city?.message} />
+              }
+            />
+            <InputError message={errors.uf?.message} />
+          </div>
+
+          <div>
+            <Label required>Cidade</Label>
+            <AsyncSelect
+              id={`city_from_${getValues("uf")}`}
+              value={getValues("city")}
+              onValueChange={(value) => handleChange("city", value)}
+              placeholder="Escolha uma cidade..."
+              service={() =>
+                ibgeDataServices
+                  .getCytiesByUF(getValues("uf"))
+                  .then(({ isOk, data }) => {
+                    return {
+                      isOk,
+                      data: isOk
+                        ? data.map((city) => ({
+                            ...data,
+                            label: city.nome,
+                            value: city.nome,
+                          }))
+                        : data,
+                    };
+                  })
+              }
+            />
+            <InputError message={errors.city?.message} />
+          </div>
         </div>
 
-        <InputGroup
-          {...register("total_area")}
-          type="tel"
-          label="Área total em hectares da fazenda"
-          placeholder="Insira o valor..."
-          onChange={(e) =>
-            handleChange("total_area", removeNonDigits(e.target.value))
-          }
-          error={errors.total_area?.message}
-        />
-        <InputGroup
-          {...register("arable_area")}
-          type="tel"
-          label="Área agricultável em hectares"
-          placeholder="Insira o valor..."
-          onChange={(e) =>
-            handleChange("arable_area", removeNonDigits(e.target.value))
-          }
-          error={errors.arable_area?.message}
-        />
-        <InputGroup
-          {...register("vegetation_area")}
-          type="tel"
-          label="Área de vegetação em hectares"
-          placeholder="Insira o valor..."
-          onChange={(e) =>
-            handleChange("vegetation_area", removeNonDigits(e.target.value))
-          }
-          error={errors.vegetation_area?.message}
-        />
+        <div className="grid md:grid-cols-2 gap-2 md:gap-5">
+          <InputGroup
+            {...register("total_area")}
+            type="tel"
+            label="Área total da fazenda em hectares"
+            placeholder="Insira o valor..."
+            onChange={(e) =>
+              handleChange("total_area", removeNonDigits(e.target.value))
+            }
+            error={errors.total_area?.message}
+          />
+          <InputGroup
+            {...register("arable_area")}
+            type="tel"
+            label="Área agricultável em hectares"
+            placeholder="Insira o valor..."
+            onChange={(e) =>
+              handleChange("arable_area", removeNonDigits(e.target.value))
+            }
+            error={errors.arable_area?.message}
+          />
+          <InputGroup
+            {...register("vegetation_area")}
+            type="tel"
+            label="Área de vegetação em hectares"
+            placeholder="Insira o valor..."
+            onChange={(e) =>
+              handleChange("vegetation_area", removeNonDigits(e.target.value))
+            }
+            error={errors.vegetation_area?.message}
+          />
+        </div>
+        <div className="space-y-1">
+          <Label>Culturas Plantadas</Label>
+          <MultipleSelect
+            options={["Soja", "Milho", "Algodão", "Café", "Cana de Açucar"]}
+            value={getValues("planting_crops")}
+            onChange={(crops) => handleChange("planting_crops", crops)}
+          />
+          <InputError message={errors.planting_crops?.message} />
+        </div>
       </div>
       <Button className="w-full">Cadastrar</Button>
     </form>

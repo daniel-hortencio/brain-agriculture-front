@@ -15,6 +15,9 @@ export const CreateProducerSchema = z
     total_area: z.string().min(1, { message: "Pelo menos 1 hectare" }),
     arable_area: z.string().min(1, { message: "Pelo menos 1 hectare" }),
     vegetation_area: z.string().min(1, { message: "Pelo menos 1 hectare" }),
+    planting_crops: z
+      .array(z.string())
+      .refine((crops) => crops.length > 0, { message: "Pelo menos 1 cultura" }),
   })
   .refine(
     (data) =>
@@ -76,4 +79,5 @@ export const defaultValues: CreateProducerType = {
   total_area: "",
   arable_area: "",
   vegetation_area: "",
+  planting_crops: [],
 };

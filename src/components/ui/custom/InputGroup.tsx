@@ -2,24 +2,24 @@ import * as React from "react";
 
 import { Label } from "../label";
 import { Input } from "../input";
+import { InputError } from "./InputError";
 
 export interface InputGroupProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  error?: string;
 }
 
 const InputGroup = React.forwardRef<HTMLInputElement, InputGroupProps>(
-  ({ className, label, id, type, ...props }, ref) => {
+  ({ label, error = "", required, ...props }, ref) => {
     return (
-      <div className="w-full">
-        <Label htmlFor={id || label.toLocaleLowerCase().replaceAll(" ", "-")}>
+      <div className="space-y-1 w-full">
+        <Label htmlFor={props.id} {...{ required }}>
           {label}
         </Label>
-        <Input
-          id={id || label.toLocaleLowerCase().replaceAll(" ", "-")}
-          ref={ref}
-          {...{ type, className, ...props }}
-        />
+        <Input {...{ ref, ...props }} />
+
+        <InputError message={error} />
       </div>
     );
   }

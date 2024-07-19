@@ -1,9 +1,13 @@
-import { IBGEStateDataType } from "@/types";
+import { IBGE_UF_Data_Type, IBGE_City_Data_Type } from "@/types";
 import { apiFetch } from "./apiFetch";
 
 export const ibgeDataServices = {
-  getStates: async () =>
-    apiFetch.get<IBGEStateDataType[]>(
-      `${process.env.NEXT_PUBLIC_API_IBGE}/localidades/estados`
+  getUFs: async () =>
+    apiFetch.get<IBGE_UF_Data_Type[]>(
+      `${process.env.NEXT_PUBLIC_API_IBGE}/localidades/estados?orderBy=nome`
+    ),
+  getCytiesByUF: async (UF: string) =>
+    apiFetch.get<IBGE_City_Data_Type[]>(
+      `${process.env.NEXT_PUBLIC_API_IBGE}/localidades/estados/${UF}/distritos?orderBy=nome`
     ),
 };

@@ -8,9 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../select";
-import { apiFetch } from "@/services/apiFetch";
 import { Skeleton } from "../skeleton";
-import { ibgeDataServices } from "@/services/ibgeDataServices";
 
 type Option = {
   label: string;
@@ -18,16 +16,26 @@ type Option = {
 };
 
 type Props = {
+  id: string;
+  value?: string;
+  onValueChange?(value: string): void;
   service: () => Promise<any>;
+  placeholder: string;
 };
 
-export const AsyncSelect = ({ service }: Props) => {
+export const AsyncSelect = ({
+  placeholder,
+  id,
+  value,
+  onValueChange,
+  service,
+}: Props) => {
   const {
     data: options = [],
     isFetching,
     isRefetching,
   } = useQuery({
-    queryKey: [`user`],
+    queryKey: [id],
     queryFn: async () => {
       const { isOk, data } = await service();
 
@@ -45,13 +53,13 @@ export const AsyncSelect = ({ service }: Props) => {
     return <Skeleton className="w-full h-10" />;
   }
   return (
-    <Select>
+    <Select {...{ value, onValueChange }}>
       <SelectTrigger>
-        <SelectValue placeholder="Escolha..." />
+        <SelectValue {...{ placeholder }} />
       </SelectTrigger>
       <SelectContent>
         {options?.map((state: Option) => (
-          <SelectItem key={state.value} value={state.value}>
+          <SelectItem key={state.value} value={state.value} className="px-4">
             {state.label}
           </SelectItem>
         ))}

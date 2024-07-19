@@ -21,13 +21,14 @@ import { removeNonDigits } from "@/utils/removeNonDigits";
 import { MultipleSelect } from "@/components/ui/custom/multiple-select";
 import { ProducerType } from "@/types";
 import { useDispatch } from "react-redux";
-import { createProducer } from "@/store/producers";
+import { createProducer, updateProducer } from "@/store/producers";
 
 type Props = {
   onSuccess: () => void;
+  editValues?: ProducerType;
 };
 
-export const FormCreateProducer = ({ onSuccess }: Props) => {
+export const FormProducer = ({ onSuccess, editValues }: Props) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -40,7 +41,14 @@ export const FormCreateProducer = ({ onSuccess }: Props) => {
     formState: { errors },
   } = useForm<CreateProducerType>({
     resolver: zodResolver(CreateProducerSchema),
-    defaultValues,
+    defaultValues: editValues
+      ? {
+          ...editValues,
+          arable_area: editValues.arable_area.toString(),
+          total_area: editValues.total_area.toString(),
+          vegetation_area: editValues.vegetation_area.toString(),
+        }
+      : defaultValues,
   });
 
   function handleChange(
@@ -72,7 +80,15 @@ export const FormCreateProducer = ({ onSuccess }: Props) => {
     };
 
     await new Promise((resolve) =>
-      setTimeout(() => resolve(dispatch(createProducer(formated_dto))), 1500)
+      setTimeout(
+        () =>
+          resolve(
+            editValues
+              ? dispatch(updateProducer({ id: editValues.id, ...formated_dto }))
+              : dispatch(createProducer(formated_dto))
+          ),
+        1500
+      )
     );
 
     onSuccess();
@@ -84,6 +100,16 @@ export const FormCreateProducer = ({ onSuccess }: Props) => {
     <form className="px-4 space-y-5" onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-2">
         <div className="grid md:grid-cols-2 gap-2 md:gap-5">
+          <div>
+            <InputGroup
+              {...register("name")}
+              required
+              label="Nome do Produtor"
+              placeholder="Insira o nome da fazenda..."
+              onChange={(e) => handleChange("name", e.target.value)}
+              error={errors.name?.message}
+            />
+          </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2 space-y-1">
               <Label required>Documento</Label>
@@ -124,16 +150,6 @@ export const FormCreateProducer = ({ onSuccess }: Props) => {
                 error={errors.doc?.message}
               />
             </div>
-          </div>
-          <div>
-            <InputGroup
-              {...register("name")}
-              required
-              label="Nome do Produtor"
-              placeholder="Insira o nome da fazenda..."
-              onChange={(e) => handleChange("name", e.target.value)}
-              error={errors.name?.message}
-            />
           </div>
         </div>
         <InputGroup

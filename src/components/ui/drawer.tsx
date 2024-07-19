@@ -13,7 +13,6 @@ const Drawer = ({
   <DrawerPrimitive.Root
     shouldScaleBackground={shouldScaleBackground}
     {...props}
-    direction="right"
     noBodyStyles
   />
 );
@@ -39,20 +38,30 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & {
+    direction?: "left" | "right";
+  }
+>(({ className, children, direction = "right", ...props }, ref) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed ml-auto inset-x-0 grid grid-cols-[0.5rem_1fr] items-center p-5 pl-3 gap-1 bottom-0 right-0 z-50 mt-24 h-screen w-full border bg-background -rotate-90",
+        "fixed  inset-x-0 items-center p-5 pl-3 gap-1 bottom-0  z-50 mt-24 h-screen w-full border bg-background -rotate-90",
+        direction === "right"
+          ? "grid grid-cols-[0.5rem_1fr] right-0 ml-auto"
+          : "grid grid-cols-[1fr_0.5rem] left-0 mr-auto",
         className
       )}
       {...props}
     >
-      <div className="mx-auto h-28 w-2 rounded-full bg-neutral-200" />
+      {direction === "right" && (
+        <div className="mx-auto h-28 w-2 rounded-full bg-neutral-200" />
+      )}
       <div className="h-full">{children}</div>
+      {direction === "left" && (
+        <div className="mx-auto h-28 w-2 rounded-full bg-neutral-200" />
+      )}
     </DrawerPrimitive.Content>
   </DrawerPortal>
 ));

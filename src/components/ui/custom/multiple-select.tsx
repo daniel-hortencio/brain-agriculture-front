@@ -36,7 +36,7 @@ export const MultipleSelect = ({ options = [], value, onChange }: Props) => {
             value.map((option) => (
               <span
                 key={option}
-                className="w-fit h-7 text-sm rounded-md pl-2 pr-0 flex items-center gap-1 bg-primary text-primary-foreground hover:bg-primary/90"
+                className="w-fit h-7 text-sm rounded-md pl-2 pr-0 flex items-center gap-1 bg-neutral-600 text-primary-foreground hover:bg-neutral-800"
               >
                 {option}
                 <button

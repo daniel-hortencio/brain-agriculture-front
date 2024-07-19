@@ -57,6 +57,7 @@ export const MultipleSelect = ({ options = [], value, onChange }: Props) => {
       <DropdownMenuContent className="w-fit">
         {options.map((option) => (
           <DropdownMenuCheckboxItem
+            key={option}
             checked={value.some((o) => o === option)}
             onCheckedChange={(checked) => handleCheck(option, checked)}
             className="px-2"

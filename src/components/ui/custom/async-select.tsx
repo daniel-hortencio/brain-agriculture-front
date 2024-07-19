@@ -58,9 +58,13 @@ export const AsyncSelect = ({
         <SelectValue {...{ placeholder }} />
       </SelectTrigger>
       <SelectContent>
-        {options?.map((state: Option) => (
-          <SelectItem key={state.value} value={state.value} className="px-4">
-            {state.label}
+        {options?.map((item: Option, index: number) => (
+          <SelectItem
+            key={`${index}_${item.value}`}
+            value={item.value}
+            className="px-4"
+          >
+            {item.label}
           </SelectItem>
         ))}
       </SelectContent>

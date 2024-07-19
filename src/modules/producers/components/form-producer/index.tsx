@@ -261,7 +261,7 @@ export const FormProducer = ({ onSuccess, editValues }: Props) => {
         </div>
       </div>
       <Button className="w-full" type="submit" loading={loading}>
-        Cadastrar
+        {editValues ? "Atualizar" : "Cadastrar"}
       </Button>
     </form>
   );

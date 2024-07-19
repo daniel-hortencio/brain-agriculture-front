@@ -1,0 +1,28 @@
+[
+  {
+    "id": "20a044da-e343-4362-82c7-59a09c5b1161",
+    "doc": "123.412.341-23",
+    "doc_type": "CPF",
+    "farm_name": "Daniel Hortencio",
+    "name": "Daniel",
+    "uf": "CE",
+    "city": "Fortaleza",
+    "total_area": 10,
+    "arable_area": 9,
+    "vegetation_area": 1,
+    "planting_crops": ["Cana de Açucar"]
+  },
+  {
+    "id": "0aafdb19-d3d2-4e6d-85b1-214b5b54a92e",
+    "doc": "234.523.423-45",
+    "doc_type": "CPF",
+    "farm_name": "Fazenda do Chico",
+    "name": "Chico",
+    "uf": "ES",
+    "city": "Airituba",
+    "total_area": 100,
+    "arable_area": 85,
+    "vegetation_area": 15,
+    "planting_crops": ["Café", "Algodão", "Milho", "Soja"]
+  }
+]

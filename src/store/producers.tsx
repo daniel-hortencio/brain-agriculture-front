@@ -1,11 +1,12 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { v4 as generateId } from "uuid";
+import producers from "../mocks/producers.json";
 
 import { ProducerType } from "@/types";
 
 export const producersSlice = createSlice({
   name: "producers",
-  initialState: [] as ProducerType[],
+  initialState: producers,
   reducers: {
     createProducer: (state, { payload }) => {
       console.log({ state, payload });

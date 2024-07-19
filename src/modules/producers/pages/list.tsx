@@ -2,7 +2,6 @@
 
 import { FormCreateProducer } from "@/components/forms/form-create-producer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Drawer,
   DrawerClose,
@@ -11,31 +10,25 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { useProducers } from "@/store/producers";
-import {
-  DropdownMenu,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
-import { Edit, EllipsisVertical, Plus, Trash2, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { TableProducers } from "../components/table-producers";
-
-const table_grid_def =
-  "grid xl:grid-cols-[1fr_1fr_8rem_9rem_8rem_9rem_1fr_4rem_2rem]";
 
 export const ProducersList = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const { producers } = useSelector(useProducers);
 
+  console.log({ producers });
+
   return (
     <div className="w-full max-w-screen-2xl flex flex-col gap-5">
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">Produtores</h1>
         <Drawer open={openDrawer} onOpenChange={(open) => setOpenDrawer(open)}>
           <DrawerTrigger asChild>
-            <Button className="space-x-2">
+            <Button className="space-x-2" size="sm">
               <Plus /> <span>Adicionar Produtor</span>
             </Button>
           </DrawerTrigger>

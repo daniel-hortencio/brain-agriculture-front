@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { AsyncSelect } from "@/components/ui/custom/AsyncSelect";
-import { InputGroup } from "@/components/ui/custom/InputGroup";
+import { AsyncSelect } from "@/components/ui/custom/async-select";
+import { InputGroup } from "@/components/ui/custom/input-group";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ibgeDataServices } from "@/services/ibgeDataServices";
@@ -16,9 +16,9 @@ import {
 import { useEffect, useState } from "react";
 import { maskCPF } from "@/utils/maskCPF";
 import { maskCNPJ } from "@/utils/maskCNPJ";
-import { InputError } from "@/components/ui/custom/InputError";
+import { InputError } from "@/components/ui/custom/input-error";
 import { removeNonDigits } from "@/utils/removeNonDigits";
-import { MultipleSelect } from "@/components/ui/custom/MultipleSelect";
+import { MultipleSelect } from "@/components/ui/custom/multiple-select";
 import { ProducerType } from "@/types";
 import { useDispatch } from "react-redux";
 import { createProducer } from "@/store/producers";

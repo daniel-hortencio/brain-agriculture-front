@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { TableActions } from "@/components/ui/custom/TableActions";
+import { TableActions } from "@/components/ui/custom/table-actions";
 import { ProducerType } from "@/types";
 
 const TABLE_GRID_DEF =
@@ -7,7 +7,7 @@ const TABLE_GRID_DEF =
 
 const TableHeader = () => (
   <div
-    className={`w-full py-2 gap-5 hidden xl:grid ${TABLE_GRID_DEF} text-sm font-medium text-neutral-500 tracking-wide uppercase`}
+    className={`w-full pb-3 gap-5 hidden xl:grid ${TABLE_GRID_DEF} text-sm font-medium text-neutral-600 tracking-wide uppercase`}
   >
     <div>
       <p>Produtor</p>
@@ -92,7 +92,7 @@ const RowMobile = ({ data, onDelete, onEdit }: TableRowProps<ProducerType>) => (
           {data.planting_crops.map((crop) => (
             <span
               key={crop}
-              className="bg-neutral-200/60 border rounded-full block py-0 px-2 w-fit whitespace-nowrap"
+              className="bg-neutral-200/60 border text-sm rounded-full block py-0 px-2 w-fit whitespace-nowrap"
             >
               {crop}
             </span>
@@ -121,9 +121,18 @@ const RowDesktop = ({
       </small>
     </div>
     <div>{data.farm_name}</div>
-    <div>{data.total_area} ha</div>
-    <div>{data.arable_area} ha</div>
-    <div>{data.vegetation_area} ha</div>
+    <div>
+      {data.total_area}
+      <small className="text-sm font-medium text-neutral-500/80">(ha)</small>
+    </div>
+    <div>
+      {data.arable_area}{" "}
+      <small className="text-sm font-medium text-neutral-500/80">(ha)</small>
+    </div>
+    <div>
+      {data.vegetation_area}{" "}
+      <small className="text-sm font-medium text-neutral-500/80">(ha)</small>
+    </div>
     <div>
       <div className="flex flex-row gap-1 flex-wrap">
         {data.planting_crops.map((crop) => (
@@ -160,12 +169,16 @@ export const TableProducers = ({
     <Card>
       <CardContent>
         <TableHeader />
-        {data?.map((producer) => (
+        {data?.map((producer, index) => (
           <div key={producer.id} className="w-full">
-            <div className="xl:hidden w-full">
+            <div
+              className={`xl:hidden w-full pb-5 ${
+                index > 0 && "border-t pt-4"
+              }`}
+            >
               <RowMobile data={producer} {...{ onDelete, onEdit }} />
             </div>
-            <div className="hidden xl:block w-full">
+            <div className="hidden xl:block w-full py-2 border-t">
               <RowDesktop data={producer} {...{ onDelete, onEdit }} />
             </div>
           </div>

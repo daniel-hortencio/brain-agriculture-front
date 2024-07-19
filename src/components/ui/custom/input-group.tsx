@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Label } from "../label";
 import { Input } from "../input";
-import { InputError } from "./InputError";
+import { InputError } from "./input-error";
 
 export interface InputGroupProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

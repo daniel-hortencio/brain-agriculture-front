@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { v4 as generateId } from "uuid";
-import producers from "../mocks/producers.json";
+import producers from "../../../mocks/producers.json";
 
 import { ProducerType } from "@/types";
 
@@ -35,5 +35,4 @@ export const { createProducer, removeProducer, updateProducer } =
   producersSlice.actions;
 
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

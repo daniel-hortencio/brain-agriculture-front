@@ -21,7 +21,7 @@ import { removeNonDigits } from "@/utils/removeNonDigits";
 import { MultipleSelect } from "@/components/ui/custom/multiple-select";
 import { ProducerType } from "@/types";
 import { useDispatch } from "react-redux";
-import { createProducer, updateProducer } from "@/store/producers";
+import { createProducer, updateProducer } from "@/modules/producers/store";
 
 type Props = {
   onSuccess: () => void;

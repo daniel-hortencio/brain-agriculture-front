@@ -1,7 +1,7 @@
 "use client";
 
 import { FormProducer } from "@/modules/producers/components/form-producer";
-import { removeProducer, useProducers } from "@/store/producers";
+import { removeProducer, useProducers } from "@/modules/producers/store";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TableProducers } from "../components/table-producers";
@@ -30,7 +30,7 @@ export const ProducersList = () => {
 
   return (
     <div className="w-full max-w-screen-2xl flex flex-col gap-5">
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between">
         <h1 className="text-2xl font-semibold">Produtores</h1>
         <ButtonDrawerFormProducer
           open={openDrawer}

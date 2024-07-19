@@ -2,7 +2,7 @@
 
 import { Provider } from "react-redux";
 import { ReactQueryClientProvider } from "@/components/providers/react-query-client-provider";
-import { store } from "@/store/producers";
+import { store } from "@/modules/producers/store";
 
 export default function RootTemplate({
   children,

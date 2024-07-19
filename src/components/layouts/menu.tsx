@@ -55,14 +55,16 @@ const MenuMobile = () => {
               <Link href="/" className="w-full">
                 <Button
                   variant="secondary"
+                  onClick={() => setOpenDrawer(false)}
                   className="bg-transparent text-base w-full flex pl-2 hover:pl-4 transition-all items-center gap-3 justify-start"
                 >
-                  <BarChartBig className="size-6" /> Home
+                  <BarChartBig className="size-6" /> Dashboard
                 </Button>
               </Link>
               <Link href="/produtores" className="w-full ">
                 <Button
                   variant="secondary"
+                  onClick={() => setOpenDrawer(false)}
                   className="bg-transparent text-base w-full pl-2 hover:pl-4 transition-all flex items-center gap-3 justify-start"
                 >
                   <Users className="size-6" /> Produtores
@@ -88,7 +90,7 @@ const MenuDesktop = () => (
           variant="secondary"
           className="bg-transparent w-full flex pl-2 hover:pl-4 transition-all items-center gap-2 justify-start h-8"
         >
-          <BarChartBig className="size-5" /> Home
+          <BarChartBig className="size-5" /> Dashboard
         </Button>
       </Link>
       <Link href="/produtores" className="w-full ">

@@ -10,7 +10,7 @@ import { useProducers } from "@/modules/producers/store";
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { ibgeDataServices } from "@/services/ibgeDataServices";
-import { Chart } from "@/components/ui/custom/chart";
+import { Chart, ChartLegends } from "@/components/ui/custom/chart";
 
 export const Dashboard = () => {
   const { producers } = useSelector(useProducers);
@@ -54,7 +54,6 @@ export const Dashboard = () => {
     return ufs_recurrency?.map((r) => ({
       name: ufs_data?.find((data) => data.sigla === r.uf)?.nome || r.uf,
       value: r.recurrency,
-      fill: "#DCDCF8",
       label: r.uf,
     }));
   };
@@ -82,7 +81,6 @@ export const Dashboard = () => {
     return crops_recurrency?.map((c) => ({
       name: c.name,
       value: c.recurrency,
-      fill: "#DCDCF8",
       label: "",
     }));
   };
@@ -103,20 +101,17 @@ export const Dashboard = () => {
           ground_usage.total -
           ground_usage.arable_area -
           ground_usage.vegetation_area,
-        fill: "#DCDCF8",
-        label: "",
+        label: "Não utilizado",
       },
       {
         name: "Agricultável",
         value: ground_usage.arable_area,
-        fill: "#DCDCF8",
-        label: "",
+        label: "Agricultável",
       },
       {
         name: "Vegetação",
         value: ground_usage.vegetation_area,
-        fill: "#DCDCF8",
-        label: "",
+        label: "Vegetação",
       },
     ];
   };
@@ -157,6 +152,9 @@ export const Dashboard = () => {
           <div className="flex-auto lg:py-10 flex items-center justify-center">
             <Chart data={getUFsChartData} />
           </div>
+          <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-x-4 gap-y-2">
+            <ChartLegends data={getUFsChartData} />
+          </CardContent>
         </Card>
         <Card>
           <CardContent>
@@ -165,15 +163,21 @@ export const Dashboard = () => {
           <div className="flex-auto lg:py-10 flex items-center justify-center">
             <Chart data={getCropsChartData} />
           </div>
+          <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-x-4 gap-y-2">
+            <ChartLegends data={getCropsChartData} />
+          </CardContent>
         </Card>
 
         <Card>
           <CardContent>
             <CardTitle className="text-lg">Uso do solo</CardTitle>
           </CardContent>
-          <div className="flex-auto lg:py-10 flex items-center justify-center">
+          <div className="flex-auto flex-col lg:py-10 flex items-center justify-center">
             <Chart data={getGroundUsageChartData} />
           </div>
+          <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-x-4 gap-y-2">
+            <ChartLegends data={getGroundUsageChartData} />
+          </CardContent>
         </Card>
       </div>
     </div>

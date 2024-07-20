@@ -17,6 +17,7 @@ const renderActiveShape = (props: any) => {
     payload,
     percent,
     value,
+    index,
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -88,7 +89,6 @@ type Props = {
   data: () => {
     name: string;
     value: number;
-    fill: string;
     label: string;
   }[];
 };
@@ -108,7 +108,10 @@ export const Chart = ({ data }: Props) => {
       }}
     >
       <Pie
-        data={data()}
+        data={data().map((d, index: number) => ({
+          ...d,
+          fill: getFillColor(index),
+        }))}
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
         cx="50%"
@@ -122,3 +125,55 @@ export const Chart = ({ data }: Props) => {
     </PieChart>
   );
 };
+
+export const ChartLegends = ({ data }: Props) => {
+  return data().map((d, index: number) => (
+    <div key={d.name} className="flex items-center gap-2">
+      <div
+        className={`w-5 h-4`}
+        style={{
+          background: getFillColor(index),
+        }}
+      />{" "}
+      <span>
+        {d.name}: <strong className="font-medium">{d.value}</strong>
+      </span>
+    </div>
+  ));
+};
+
+const getFillColor = (index: number) =>
+  [
+    "#f87171",
+    "#84cc16",
+    "#14b8a6",
+    "#6366f1",
+    "#d946ef",
+    "#fb923c",
+    "#22c55e",
+    "#06b6d4",
+    "#8b5cf6",
+    "#ec4899",
+    "#f59e0b",
+    "#10b981",
+    "#0ea5e9",
+    "#f43f5e",
+    "#eab308",
+    "#3b82f6",
+    "#a855f7",
+    "#b91c1c",
+    "#4d7c0f",
+    "#0e7490",
+    "#4338ca",
+    "#a21caf",
+    "#ea580c",
+    "#15803d",
+    "#0369a1",
+    "#6d28d9",
+    "#be185d",
+    "#047857",
+    "#1d4ed8",
+    "#7e22ce",
+    "#be123c",
+    "#0f766e",
+  ][index];

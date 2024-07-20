@@ -125,8 +125,8 @@ export const Dashboard = () => {
         <Card className="w-full md:max-w-80">
           <CardContent className="space-y-2">
             <CardTitle className="text-lg">Total de fazendas</CardTitle>
-            <CardDescription className="text-4xl lg:text-6xl font-semibold text-neutral-400">
-              {total_farms}
+            <CardDescription className="text-3xl lg:text-4xl font-semibold text-neutral-500">
+              {total_farms.toLocaleString("pt-BR")}
             </CardDescription>
           </CardContent>
         </Card>
@@ -135,9 +135,9 @@ export const Dashboard = () => {
             <CardTitle className="text-lg">
               Total de fazendas em hectares
             </CardTitle>
-            <CardDescription className="text-4xl lg:text-6xl font-semibold text-neutral-400">
-              {total_farms_area}
-              <span className="font-medium text-2xl lg:text-4xl text-neutral-400/70">
+            <CardDescription className="text-3xl lg:text-4xl font-semibold text-neutral-500">
+              {total_farms_area.toLocaleString("pt-BR")}
+              <span className="font-medium text-xl lg:text-2xl text-neutral-400/70">
                 ha
               </span>
             </CardDescription>

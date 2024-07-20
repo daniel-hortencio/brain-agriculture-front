@@ -121,18 +121,9 @@ const RowDesktop = ({
       </small>
     </div>
     <div>{data.farm_name}</div>
-    <div>
-      {data.total_area}
-      <small className="text-sm font-medium text-neutral-500/80">(ha)</small>
-    </div>
-    <div>
-      {data.arable_area}{" "}
-      <small className="text-sm font-medium text-neutral-500/80">(ha)</small>
-    </div>
-    <div>
-      {data.vegetation_area}{" "}
-      <small className="text-sm font-medium text-neutral-500/80">(ha)</small>
-    </div>
+    <div>{data.total_area.toLocaleString("pt-BR")}</div>
+    <div>{data.arable_area.toLocaleString("pt-BR")} </div>
+    <div>{data.vegetation_area.toLocaleString("pt-BR")} </div>
     <div>
       <div className="flex flex-row gap-1 flex-wrap">
         {data.planting_crops.map((crop) => (

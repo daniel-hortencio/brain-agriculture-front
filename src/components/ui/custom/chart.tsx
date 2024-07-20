@@ -70,7 +70,9 @@ const renderActiveShape = (props: any) => {
         textAnchor={textAnchor}
         className="font-semibold fill-foreground"
       >
-        {payload.label} ({value})
+        {payload.label
+          ? `${payload.label} (${value.toLocaleString("pt-BR")})`
+          : value.toLocaleString("pt-BR")}
       </text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
@@ -130,13 +132,16 @@ export const ChartLegends = ({ data }: Props) => {
   return data().map((d, index: number) => (
     <div key={d.name} className="flex items-center gap-2">
       <div
-        className={`w-5 h-4`}
+        className="w-5 h-4"
         style={{
           background: getFillColor(index),
         }}
-      />{" "}
+      />
       <span>
-        {d.name}: <strong className="font-medium">{d.value}</strong>
+        {d.name}:{" "}
+        <strong className="font-medium">
+          {d.value.toLocaleString("pt-BR")}
+        </strong>
       </span>
     </div>
   ));

@@ -32,7 +32,7 @@ export const ButtonDrawerFormProducer = ({
         <DrawerHeader className="flex items-center justify-between gap-5">
           <DrawerTitle>Adicionar Novo Produtor</DrawerTitle>
           <DrawerClose asChild>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" className="rounded-full">
               <X />
             </Button>
           </DrawerClose>

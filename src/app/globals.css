@@ -63,10 +63,30 @@
     @apply border-border;
   }
   body {
-    @apply bg-neutral-50 text-foreground overflow-x-hidden;
+    @apply bg-slate-200/80 text-slate-600 overflow-x-hidden;
   }
 }
 
 .test {
   border: solid 1px red;
+}
+
+.neumorphic {
+  @apply shadow-[.4rem_-.4rem_.4rem_rgba(255,255,255,.6),-.4rem_.4rem_.5rem_rgba(148,163,184,.5)];
+}
+
+.neumorphic-sm {
+  @apply shadow-[.25rem_-.25rem_.25rem_rgba(255,255,255,.5),-.25rem_.25rem_.25rem_rgba(148,163,184,.3)];
+}
+
+.neumorphic-sm-inset {
+  @apply shadow-[inset_.25rem_-.25rem_.25rem_rgba(255,255,255,.6),inset_-.25rem_.25rem_.25rem_rgba(148,163,184,.5)];
+}
+
+.neumorphic-xs-inset {
+  @apply shadow-[inset_.1rem_-.1rem_.1rem_rgba(255,255,255,1),inset_-.1rem_.1rem_.05rem_rgba(148,163,184,.4)];
+}
+
+.concave {
+  @apply bg-slate-200 bg-[linear-gradient(225deg,rgba(148,163,184,0.1),rgb(255,255,255)100%)];
 }

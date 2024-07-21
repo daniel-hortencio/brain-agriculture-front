@@ -7,15 +7,15 @@ import {
   DropdownMenuTrigger,
 } from "../dropdown-menu";
 
-type Props = {
+export type TableActionsProps = {
   onDelete: () => void;
   onEdit: () => void;
 };
 
-export const TableActions = ({ onDelete, onEdit }: Props) => (
+export const TableActions = ({ onDelete, onEdit }: TableActionsProps) => (
   <div>
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild data-testid="table-actions-trigger">
         <Button variant="secondary" size="icon" className="p-0 bg-transparent">
           <EllipsisVertical />
         </Button>

@@ -97,7 +97,10 @@ export const FormProducer = ({ onSuccess, editValues }: Props) => {
   };
 
   return (
-    <form className="px-4 space-y-5" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="px-4 space-y-5 pb-5 overflow-visible"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className="space-y-2">
         <div className="grid md:grid-cols-2 gap-2 md:gap-5">
           <div>
@@ -260,7 +263,7 @@ export const FormProducer = ({ onSuccess, editValues }: Props) => {
           <InputError message={errors.planting_crops?.message} />
         </div>
       </div>
-      <Button className="w-full" type="submit" loading={loading}>
+      <Button className="w-full neumorphic-sm" type="submit" loading={loading}>
         {editValues ? "Atualizar" : "Cadastrar"}
       </Button>
     </form>

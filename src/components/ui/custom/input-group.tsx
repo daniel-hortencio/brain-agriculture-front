@@ -8,6 +8,7 @@ export interface InputGroupProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
+  "data-testid"?: string;
 }
 
 const InputGroup = React.forwardRef<HTMLInputElement, InputGroupProps>(

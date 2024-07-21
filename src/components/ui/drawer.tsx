@@ -47,7 +47,7 @@ const DrawerContent = React.forwardRef<
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed  inset-x-0 items-center p-5 pl-3 gap-1 bottom-0  z-50 mt-24 h-screen w-full border bg-background -rotate-90",
+        "fixed inset-x-0 items-center p-5 pl-3 gap-1 bottom-0  z-50 mt-24 h-screen w-full border bg-slate-100 -rotate-90",
         direction === "right"
           ? "grid grid-cols-[0.5rem_1fr] right-0 ml-auto"
           : "grid grid-cols-[1fr_0.5rem] left-0 mr-auto",
@@ -56,11 +56,11 @@ const DrawerContent = React.forwardRef<
       {...props}
     >
       {direction === "right" && (
-        <div className="mx-auto h-28 w-2 rounded-full bg-neutral-200" />
+        <div className="mx-auto h-28 w-2 rounded-full bg-slate-300/40 neumorphic-sm border-slate-400/30 border" />
       )}
       <div className="h-full">{children}</div>
       {direction === "left" && (
-        <div className="mx-auto h-28 w-2 rounded-full bg-neutral-200" />
+        <div className="mx-auto h-28 w-2 rounded-full bg-slate-300/40 neumorphic-sm border-slate-400/30 border" />
       )}
     </DrawerPrimitive.Content>
   </DrawerPortal>

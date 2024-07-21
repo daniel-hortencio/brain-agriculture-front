@@ -15,7 +15,7 @@ type Option = {
   value: string;
 };
 
-type Props = {
+export type AsyncSelectProps = {
   id: string;
   value?: string;
   onValueChange?(value: string): void;
@@ -29,12 +29,8 @@ export const AsyncSelect = ({
   value,
   onValueChange,
   service,
-}: Props) => {
-  const {
-    data: options = [],
-    isFetching,
-    isRefetching,
-  } = useQuery({
+}: AsyncSelectProps) => {
+  const { data: options = [], isFetching } = useQuery({
     queryKey: [id],
     queryFn: async () => {
       const { isOk, data } = await service();
@@ -47,11 +43,10 @@ export const AsyncSelect = ({
     },
   });
 
-  const loading = isFetching || isRefetching;
-
-  if (loading) {
+  if (isFetching) {
     return <Skeleton className="w-full h-10" />;
   }
+
   return (
     <Select {...{ value, onValueChange }}>
       <SelectTrigger>

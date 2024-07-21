@@ -29,14 +29,14 @@ export const MultipleSelect = ({ options = [], value, onChange }: Props) => {
     <DropdownMenu>
       <DropdownMenuTrigger
         asChild
-        className="border border-input transition-all bg-background hover:text-accent-foreground cursor-pointer"
+        className="border border-input transition-all hover:text-accent-foreground cursor-pointer rounded-md bg-slate-100 neumorphic-sm-inset focus:shadow-emerald-500/80 focus:bg-slate-100"
       >
         <div className="w-full h-fit min-h-10 p-1 flex flex-wrap gap-2 items-center">
           {value.length > 0 ? (
             value.map((option) => (
               <span
                 key={option}
-                className="w-fit h-7 text-sm rounded-full pl-2 pr-0 flex items-center gap-1 bg-neutral-200/80 text-neutral-700 font-medium hover:bg-neutral-300/80"
+                className="w-fit h-7 text-sm rounded-full pl-2 pr-0 flex items-center gap-1 bg-slate-600/80 text-white font-medium hover:bg-slate-600 transition-all"
               >
                 {option}
                 <button
@@ -48,7 +48,7 @@ export const MultipleSelect = ({ options = [], value, onChange }: Props) => {
               </span>
             ))
           ) : (
-            <span className="text-sm text-neutral-400 ml-2">
+            <span className="text-sm text-slate-500 ml-2">
               Escolha suas culturas...
             </span>
           )}

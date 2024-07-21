@@ -29,7 +29,7 @@ export const ProducersList = () => {
   }, [openDrawer]);
 
   return (
-    <div className="w-full max-w-screen-2xl flex flex-col gap-5">
+    <div className="w-full flex flex-col gap-5">
       <div className="flex items-start justify-between">
         <h1 className="text-2xl font-semibold">Produtores</h1>
         <ButtonDrawerFormProducer

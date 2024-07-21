@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { TableActions } from "@/components/ui/custom/table-actions";
+import { Divider } from "@/components/ui/divider";
 import { ProducerType } from "@/types";
 
 const TABLE_GRID_DEF =
@@ -7,20 +8,20 @@ const TABLE_GRID_DEF =
 
 const TableHeader = () => (
   <div
-    className={`w-full pb-3 gap-5 hidden xl:grid ${TABLE_GRID_DEF} text-sm font-medium text-neutral-600 tracking-wide uppercase`}
+    className={`w-full pb-3 gap-5 hidden xl:grid ${TABLE_GRID_DEF} text-sm font-medium text-slate-600 tracking-wide uppercase`}
   >
     <div>
       <p>Produtor</p>
     </div>
     <div>Fazenda</div>
     <div>
-      Área Total <span className="lowercase text-neutral-400">(ha)</span>
+      Área Total <span className="lowercase text-slate-400">(ha)</span>
     </div>
     <div>
-      Agricultável <span className="lowercase text-neutral-400">(ha)</span>
+      Agricultável <span className="lowercase text-slate-400">(ha)</span>
     </div>
     <div>
-      Vegetação <span className="lowercase text-neutral-400">(ha)</span>
+      Vegetação <span className="lowercase text-slate-400">(ha)</span>
     </div>
     <div>Culturas</div>
     <div>Cidade</div>
@@ -61,7 +62,7 @@ const RowMobile = ({ data, onDelete, onEdit }: TableRowProps<ProducerType>) => (
           <strong className="font-semibold">Área total:</strong>{" "}
           <span>
             {data.total_area}{" "}
-            <small className="text-sm font-medium text-neutral-500/80">
+            <small className="text-sm font-medium text-slate-500/80">
               (ha)
             </small>
           </span>
@@ -71,7 +72,7 @@ const RowMobile = ({ data, onDelete, onEdit }: TableRowProps<ProducerType>) => (
           <strong className="font-semibold">Área agricultável:</strong>{" "}
           <span>
             {data.arable_area}{" "}
-            <small className="text-sm font-medium text-neutral-500/80">
+            <small className="text-sm font-medium text-slate-500/80">
               (ha)
             </small>
           </span>
@@ -80,7 +81,7 @@ const RowMobile = ({ data, onDelete, onEdit }: TableRowProps<ProducerType>) => (
           <strong className="font-semibold">Vegetação:</strong>{" "}
           <span>
             {data.vegetation_area}{" "}
-            <small className="text-sm font-medium text-neutral-500/80">
+            <small className="text-sm font-medium text-slate-500/80">
               (ha)
             </small>
           </span>
@@ -92,7 +93,7 @@ const RowMobile = ({ data, onDelete, onEdit }: TableRowProps<ProducerType>) => (
           {data.planting_crops.map((crop) => (
             <span
               key={crop}
-              className="bg-neutral-200/60 border text-sm rounded-full block py-0 px-2 w-fit whitespace-nowrap"
+              className="bg-slate-600 text-white border text-sm rounded-full block py-0 px-2 w-fit whitespace-nowrap"
             >
               {crop}
             </span>
@@ -116,7 +117,7 @@ const RowDesktop = ({
   <div className={`w-full gap-5 ${TABLE_GRID_DEF}`}>
     <div>
       <p>{data.name}</p>
-      <small className="text-sm font-medium text-neutral-500/80">
+      <small className="text-sm font-medium text-slate-500/80">
         {data.doc}
       </small>
     </div>
@@ -129,7 +130,7 @@ const RowDesktop = ({
         {data.planting_crops.map((crop) => (
           <span
             key={crop}
-            className="bg-neutral-200/60 border text-sm rounded-full block py-0 px-2 w-fit whitespace-nowrap"
+            className="bg-slate-600 text-white border text-sm rounded-full block py-0 px-2 w-fit whitespace-nowrap"
           >
             {crop}
           </span>
@@ -162,14 +163,12 @@ export const TableProducers = ({
         <TableHeader />
         {data?.map((producer, index) => (
           <div key={producer.id} className="w-full">
-            <div
-              className={`xl:hidden w-full pb-5 ${
-                index > 0 && "border-t pt-4"
-              }`}
-            >
+            <div className={`xl:hidden w-full pb-5 space-y-4`}>
+              {index > 0 && <Divider />}
               <RowMobile data={producer} {...{ onDelete, onEdit }} />
             </div>
-            <div className="hidden xl:block w-full py-2 border-t">
+            <div className="hidden xl:block w-full py-2 space-y-3">
+              <Divider />
               <RowDesktop data={producer} {...{ onDelete, onEdit }} />
             </div>
           </div>

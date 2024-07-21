@@ -20,9 +20,22 @@
     "name": "Chico",
     "uf": "ES",
     "city": "Airituba",
-    "total_area": 100,
-    "arable_area": 85,
-    "vegetation_area": 15,
+    "total_area": 25,
+    "arable_area": 20,
+    "vegetation_area": 3,
     "planting_crops": ["Café", "Algodão", "Milho", "Soja"]
+  },
+  {
+    "id": "0aafdb19-d3d2-4e6d-85b1-214b5b54a92f",
+    "doc": "12.341.234/1231-23",
+    "doc_type": "CNPJ",
+    "farm_name": "Fazenda do Azevedo",
+    "name": "Azevedo",
+    "uf": "CE",
+    "city": "Sobral",
+    "total_area": 31,
+    "arable_area": 25,
+    "vegetation_area": 2,
+    "planting_crops": ["Cana de Açucar", "Milho"]
   }
 ]

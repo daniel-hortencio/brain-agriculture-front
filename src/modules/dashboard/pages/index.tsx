@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { ibgeDataServices } from "@/services/ibgeDataServices";
 import { Chart, ChartLegends } from "@/components/ui/custom/chart";
+import { Divider } from "@/components/ui/divider";
 
 export const Dashboard = () => {
   const { producers } = useSelector(useProducers);
@@ -101,23 +102,23 @@ export const Dashboard = () => {
           ground_usage.total -
           ground_usage.arable_area -
           ground_usage.vegetation_area,
-        label: "Não utilizado",
+        label: "",
       },
       {
         name: "Agricultável",
         value: ground_usage.arable_area,
-        label: "Agricultável",
+        label: "",
       },
       {
         name: "Vegetação",
         value: ground_usage.vegetation_area,
-        label: "Vegetação",
+        label: "",
       },
     ];
   };
 
   return (
-    <div className="w-full max-w-screen-2xl flex flex-col gap-5">
+    <div className="w-full flex flex-col gap-5">
       <div className="flex">
         <h1 className="text-2xl font-semibold">Produtores</h1>
       </div>
@@ -125,7 +126,7 @@ export const Dashboard = () => {
         <Card className="w-full md:max-w-80">
           <CardContent className="space-y-2">
             <CardTitle className="text-lg">Total de fazendas</CardTitle>
-            <CardDescription className="text-3xl lg:text-4xl font-semibold text-neutral-500">
+            <CardDescription className="text-3xl lg:text-4xl font-semibold text-slate-500">
               {total_farms.toLocaleString("pt-BR")}
             </CardDescription>
           </CardContent>
@@ -135,9 +136,9 @@ export const Dashboard = () => {
             <CardTitle className="text-lg">
               Total de fazendas em hectares
             </CardTitle>
-            <CardDescription className="text-3xl lg:text-4xl font-semibold text-neutral-500">
+            <CardDescription className="text-3xl lg:text-4xl font-semibold text-slate-500">
               {total_farms_area.toLocaleString("pt-BR")}
-              <span className="font-medium text-xl lg:text-2xl text-neutral-400/70">
+              <span className="font-medium text-xl lg:text-2xl text-slate-400/70">
                 ha
               </span>
             </CardDescription>
@@ -152,6 +153,7 @@ export const Dashboard = () => {
           <div className="flex-auto lg:py-10 flex items-center justify-center">
             <Chart data={getUFsChartData} />
           </div>
+          <Divider className="mx-5" />
           <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-x-4 gap-y-2">
             <ChartLegends data={getUFsChartData} />
           </CardContent>
@@ -160,9 +162,11 @@ export const Dashboard = () => {
           <CardContent>
             <CardTitle className="text-lg">Culturas</CardTitle>
           </CardContent>
+
           <div className="flex-auto lg:py-10 flex items-center justify-center">
             <Chart data={getCropsChartData} />
           </div>
+          <Divider className="mx-5" />
           <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-x-4 gap-y-2">
             <ChartLegends data={getCropsChartData} />
           </CardContent>
@@ -175,6 +179,7 @@ export const Dashboard = () => {
           <div className="flex-auto flex-col lg:py-10 flex items-center justify-center">
             <Chart data={getGroundUsageChartData} />
           </div>
+          <Divider className="mx-5" />
           <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-x-4 gap-y-2">
             <ChartLegends data={getGroundUsageChartData} />
           </CardContent>

@@ -23,7 +23,7 @@ export const ButtonDrawerFormProducer = ({
 }: Props) => (
   <Drawer {...{ open, onOpenChange }} direction="right">
     <DrawerTrigger asChild>
-      <Button className="space-x-2" size="sm">
+      <Button className="space-x-2 neumorphic-sm" size="sm">
         <Plus /> <span>Adicionar Produtor</span>
       </Button>
     </DrawerTrigger>

@@ -104,7 +104,7 @@ export const Chart = ({ data }: Props) => {
   return (
     <PieChart
       height={280}
-      width={400}
+      width={280}
       style={{
         overflow: "visible",
       }}

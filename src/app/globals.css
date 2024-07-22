@@ -62,6 +62,9 @@
   * {
     @apply border-border;
   }
+  html {
+    @apply overflow-x-hidden;
+  }
   body {
     @apply bg-slate-200/80 text-slate-600 overflow-x-hidden;
   }

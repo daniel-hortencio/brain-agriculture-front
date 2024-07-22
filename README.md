@@ -12,6 +12,8 @@ Next, Shadcn, Tailwind, React Query, React Hook Form, Redux e Zod
 2. Os dados são guardados dentro de um store e manipulado através do redux, conforme pedido na descrição. Também seria confortável usar Context Api ou Zustand para manipular o estado.
 3. Para os dados de Estado e Cidado, optei por usar diretamente a [api do ibge](https://servicodados.ibge.gov.br/)
 4. Para os estilos, optei por usar componentes Shadcn e tailwind para prover mais agilidade no desenvolvimento. Também estaria confortável em usar qualquer outra lib ou framework CSS.
+5. Para requisições à api de localidades usei o fetch api
+6. Realizei alguns testes unitários com jest, mas não fiz muitos em vista do tempo.
    
 ---
 

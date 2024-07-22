@@ -95,9 +95,13 @@ type Props = {
   }[];
 };
 
+const isSSR = typeof window === "undefined";
+
 export const Chart = ({ data }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window?.innerWidth || 280);
+  const [windowWidth, setWindowWidth] = useState(
+    isSSR ? 280 : window.innerWidth
+  );
 
   const onPieEnter = (_: any, index: number) => {
     setActiveIndex(index);

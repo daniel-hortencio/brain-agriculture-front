@@ -31,27 +31,31 @@ export const ProducersList = () => {
   return (
     <div className="w-full flex flex-col gap-5">
       <div className="flex items-start justify-between">
-        <h1 className="text-2xl font-semibold">Produtores</h1>
-        <ButtonDrawerFormProducer
-          open={openDrawer}
-          onOpenChange={(open) => setOpenDrawer(open)}
-        >
-          <FormProducer
-            editValues={producerToEdit}
-            onSuccess={() => {
-              setOpenDrawer(false);
-            }}
-          />
-        </ButtonDrawerFormProducer>
+        <h1 className="text-2xl font-semibold fade-left">Produtores</h1>
+        <div className="fade-right">
+          <ButtonDrawerFormProducer
+            open={openDrawer}
+            onOpenChange={(open) => setOpenDrawer(open)}
+          >
+            <FormProducer
+              editValues={producerToEdit}
+              onSuccess={() => {
+                setOpenDrawer(false);
+              }}
+            />
+          </ButtonDrawerFormProducer>
+        </div>
       </div>
       {producers.length === 0 ? (
         <h2>Você não tem produtores cadastrados</h2>
       ) : (
-        <TableProducers
-          data={producers}
-          onDelete={(id) => dispatch(removeProducer({ id }))}
-          onEdit={(producer) => setProducerToEdit(producer)}
-        />
+        <div className="fade-bottom">
+          <TableProducers
+            data={producers}
+            onDelete={(id) => dispatch(removeProducer({ id }))}
+            onEdit={(producer) => setProducerToEdit(producer)}
+          />
+        </div>
       )}
     </div>
   );

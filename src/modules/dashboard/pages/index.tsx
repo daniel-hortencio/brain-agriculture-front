@@ -120,9 +120,9 @@ export const Dashboard = () => {
   return (
     <div className="w-full flex flex-col gap-5">
       <div className="flex">
-        <h1 className="text-2xl font-semibold">Produtores</h1>
+        <h1 className="text-2xl font-semibold fade-left">Produtores</h1>
       </div>
-      <div className="flex flex-col md:flex-row gap-5">
+      <div className="flex flex-col md:flex-row gap-5 fade-left">
         <Card className="w-full md:max-w-80">
           <CardContent className="space-y-2">
             <CardTitle className="text-lg">Total de fazendas</CardTitle>
@@ -145,7 +145,7 @@ export const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
-      <div className="grid xl:grid-cols-3 gap-5">
+      <div className="grid xl:grid-cols-3 gap-5 fade-bottom">
         <Card>
           <CardContent>
             <CardTitle className="text-lg">Estados</CardTitle>

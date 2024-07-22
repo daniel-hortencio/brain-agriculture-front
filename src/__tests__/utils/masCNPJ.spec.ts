@@ -1,8 +1,5 @@
 import { maskCNPJ } from "@/utils/maskCNPJ";
 
-const handleDelete = jest.fn();
-const handleEdit = jest.fn();
-
 describe("Mask CNPJ", () => {
   it("return mask", () => {
     const cnpj = "11222333000141";

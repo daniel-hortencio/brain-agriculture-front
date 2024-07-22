@@ -11,7 +11,8 @@ Next, Shadcn, Tailwind, React Query, React Hook Form, Redux e Zod
 1. Os dados iniciais a serem apresentados foram colocados dentro de um json na pasta mock. Optei por não desmembrar produtor e fazenda em dados diferentes já que a descrição do teste e requisitos do formulário sugerem uma relação 1-1
 2. Os dados são guardados dentro de um store e manipulado através do redux, conforme pedido na descrição. Também seria confortável usar Context Api ou Zustand para manipular o estado.
 3. Para os dados de Estado e Cidado, optei por usar diretamente a [api do ibge](https://servicodados.ibge.gov.br/)
-
+4. Para os estilos, optei por usar componentes Shadcn e tailwind para prover mais agilidade no desenvolvimento. Também estaria confortável em usar qualquer outra lib ou framework CSS.
+   
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

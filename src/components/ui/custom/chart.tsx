@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pie, PieChart, Sector } from "recharts";
 
 const renderActiveShape = (props: any) => {
@@ -72,7 +72,7 @@ const renderActiveShape = (props: any) => {
       >
         {payload.label
           ? `${payload.label} (${value.toLocaleString("pt-BR")})`
-          : value.toLocaleString("pt-BR")}
+          : `${value.toLocaleString("pt-BR")}`}
       </text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
@@ -97,16 +97,31 @@ type Props = {
 
 export const Chart = ({ data }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window?.innerWidth || 280);
+
   const onPieEnter = (_: any, index: number) => {
     setActiveIndex(index);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <PieChart
       height={280}
-      width={280}
+      width={windowWidth >= 1280 ? 360 : windowWidth / 2}
       style={{
         overflow: "visible",
+        minWidth: 280,
       }}
     >
       <Pie

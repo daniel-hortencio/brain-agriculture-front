@@ -102,7 +102,7 @@ export const Dashboard = () => {
           ground_usage.total -
           ground_usage.arable_area -
           ground_usage.vegetation_area,
-        label: "",
+        label: ``,
       },
       {
         name: "Agricultável",

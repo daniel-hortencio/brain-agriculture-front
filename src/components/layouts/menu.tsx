@@ -113,10 +113,10 @@ export const Menu = () => {
 
   return (
     <>
-      <div className="2xl:hidden">
+      <div className="2xl:hidden fade">
         <MenuMobile {...{ path }} />
       </div>
-      <div className="hidden 2xl:block">
+      <div className="hidden 2xl:block fade-top">
         <MenuDesktop {...{ path }} />
       </div>
     </>

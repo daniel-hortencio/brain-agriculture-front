@@ -16,7 +16,11 @@ export const TableActions = ({ onDelete, onEdit }: TableActionsProps) => (
   <div>
     <DropdownMenu>
       <DropdownMenuTrigger asChild data-testid="table-actions-trigger">
-        <Button variant="secondary" size="icon" className="p-0 bg-transparent">
+        <Button
+          variant="secondary"
+          size="icon"
+          className="p-0 bg-transparent hover:bg-slate-200 hover:text-primary"
+        >
           <EllipsisVertical />
         </Button>
       </DropdownMenuTrigger>
@@ -24,13 +28,13 @@ export const TableActions = ({ onDelete, onEdit }: TableActionsProps) => (
         <DropdownMenuItem asChild className="w-full">
           <Button
             variant="secondary"
-            className="p-0 bg-transparent space-x-2"
+            className="p-0 bg-transparent space-x-2 hover:bg-slate-100"
             onClick={onEdit}
           >
             <Edit className="size-5" /> <span>Editar</span>
           </Button>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild className="w-full">
+        <DropdownMenuItem asChild className="w-full hover:bg-slate-100">
           <Button
             variant="secondary"
             className="p-0 bg-transparent space-x-2"

@@ -2,6 +2,10 @@
 
 [Clique aqui para ver o projeto no ar](https://brain-agriculture-front.vercel.app/)
 
+### Tecnologias usadas:
+
+Next, Shadcn, Tailwind, React Query, React Hook Form, Redux e Zod
+
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
